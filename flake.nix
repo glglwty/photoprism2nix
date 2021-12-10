@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     ranz2nix = { url = "github:andir/ranz2nix"; flake = false; };
     photoprism = { url = "github:photoprism/photoprism"; flake = false; };
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
@@ -226,7 +226,7 @@
                     THUMB_SIZE_UNCACHED = "7680";
                     THUMB_UNCACHED = "true";
                     UPLOAD_NSFW = "true";
-                  } // (if cfg.keyFile then { ADMIN_PASSWORD = "photoprism"; } else { })
+                  } // (if !cfg.keyFile then { ADMIN_PASSWORD = "photoprism"; } else { })
               );
             };
           };
@@ -261,8 +261,8 @@
                   # 21.05 does not have libtensorflow-bin 1.x anymore & photoprism isn't compatible with tensorflow 2.x yet
                   # https://github.com/photoprism/photoprism/issues/222
                   src = fetchurl {
-                    url = "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.14.0.tar.gz";
-                    sha256 = "04bi3ijq4sbb8c5vk964zlv0j9mrjnzzxd9q9knq3h273nc1a36k";
+                    url = "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.15.0.tar.gz";
+                    sha256 = "1vad0ghpknqp6vdfy070ncd7xa1pjcizmk2m7x9d7klyf1dgvjyy";
                   };
                 }))
               ];
